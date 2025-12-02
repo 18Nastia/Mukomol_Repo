@@ -8,4 +8,20 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Image\icon-strelka.png" />
+    <None Remove="Image\logo-mukomol.png" />
+    <None Remove="logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Image\icon-strelka.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\logo-mukomol.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="logo.png" />
+  </ItemGroup>
+
 </Project>

@@ -31,4 +31,8 @@
     <Resource Include="Image\logo-mukomol.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\" />
+  </ItemGroup>
+
 </Project>

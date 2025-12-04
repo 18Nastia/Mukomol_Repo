@@ -1,0 +1,48 @@
+﻿<Page x:Class="Mukomol_Praktik.Pages.EditChoiceOrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mukomol_Praktik.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditChoiceOrderPage">
+
+    <Grid Background="#f1cf69">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Image Source="/Image/icon-strelka.png" 
+    HorizontalAlignment="Left" 
+    Height="33" 
+    Margin="30,40,0,0" 
+    VerticalAlignment="Top" 
+    Width="37"
+    MouseDown="ToBack">
+                </Image>
+                <TextBlock Text="Изменение заказа"
+FontSize="30" 
+FontWeight="Bold" 
+Foreground="#041e56" 
+HorizontalAlignment="Center" 
+VerticalAlignment="Top" 
+Margin="0,40,0,0"/>
+                <TextBlock Text="Выберите заказ" FontSize="16" Foreground="#041e56" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0"/>
+
+                <Grid Margin="50,125,50,100"  Background="#FFFDE9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="381*"/>
+                        <ColumnDefinition Width="319*"/>
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+                <Button Content="Выбрать" Width="130" FontSize="14" Padding="7" HorizontalAlignment="Center" Margin="0,285,0,30" Background="#041e56" Foreground="White" VerticalAlignment="Bottom" Click="ToChoiceDoing">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

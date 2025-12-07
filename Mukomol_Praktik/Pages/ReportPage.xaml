@@ -1,0 +1,106 @@
+﻿<Page x:Class="Mukomol_Praktik.Pages.ReportPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mukomol_Praktik.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ReportPage">
+
+    <Grid>
+        <!-- Верхняя панель -->
+        <Grid Background="#f1cf69" Height="80" VerticalAlignment="Top">
+
+            <Image Source="/Image/logo-mukomol.png" 
+           Width="50" Height="60" 
+           HorizontalAlignment="Left" 
+           VerticalAlignment="Center"  
+           Margin="50,0,0,0"/>
+
+            <TextBlock Text="Партнеры" 
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Center"
+        FontSize="16"
+        Foreground="White"
+        Margin="0,0,340,0"/>
+
+            <TextBlock Text="Продукция" 
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Center"
+        FontSize="16"
+        Foreground="White"
+        Margin="0,0,245,0"
+        MouseDown="ToProduct"/>
+
+            <TextBlock Text="Заказы" 
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Center"
+        FontSize="16"
+        Foreground="White"
+        Margin="0,0,180,0"/>
+
+            <TextBlock Text="Отгрузки" 
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Center"
+        FontSize="16"
+        Foreground="White"
+        Margin="0,0,100,0"
+        MouseDown="ToShipment"/>
+
+            <TextBlock Text="Отчёты" 
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Center"
+        FontSize="16"
+        Foreground="Gray"
+        Margin="0,0,30,0"/>
+        </Grid>
+
+        <!-- Стрелка Назад -->
+        <Image Source="/Image/icon-strelka.png" 
+       HorizontalAlignment="Left" 
+       Height="33" 
+       Margin="30,120,0,0" 
+       VerticalAlignment="Top" 
+       Width="37"
+       MouseDown="ToBack"/>
+
+        <TextBlock Text="Отчёты" FontSize="30" FontWeight="Bold"
+                   Foreground="#041e56" HorizontalAlignment="Center"
+                   Margin="0,110,0,0"/>
+
+        <Grid Margin="50,170,50,80" Background="#FFFDE9">
+            <StackPanel Margin="20">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Выберите период с"/>
+                    <DatePicker Margin="5"/>
+                    <TextBlock Text="по"/>
+                    <DatePicker Margin="5"/>
+                    <Button Content="Сформировать отчет"
+                            Background="#041e56" Foreground="White"
+                            Margin="10,0,0,0"/>
+                </StackPanel>
+
+                <Grid Margin="0,30,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+                        <TextBlock Text="Топ клиентов" FontWeight="Bold"/>
+                        <TextBlock Text="Клиент — Кол-во заказов"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Топ товаров" FontWeight="Bold"/>
+                        <TextBlock Text="Товар — Кол-во заказов"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Margin="0,20,0,0" Text="Всего заказов:"/>
+                <TextBlock Text="Отгружено заказов:"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

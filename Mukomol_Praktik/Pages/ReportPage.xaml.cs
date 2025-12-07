@@ -1,14 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mukomol_Praktik.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
-using ClosedXML.Excel;
 
 namespace Mukomol_Praktik.Pages
 {
+    /// <summary>
+    /// Логика взаимодействия для ReportPage.xaml
+    /// </summary>
     public partial class ReportPage : Page
     {
         private MukomolContext context;
@@ -22,9 +29,14 @@ namespace Mukomol_Praktik.Pages
         private void ToBack(object sender, MouseButtonEventArgs e)
         {
             if (NavigationService != null && NavigationService.CanGoBack)
+            {
                 NavigationService.GoBack();
+            }
             else
+            {
+                // Можно, например, вывести сообщение или просто ничего не делать
                 MessageBox.Show("Нет предыдущей страницы для возврата.", "Навигация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void ToProduct(object sender, MouseButtonEventArgs e)

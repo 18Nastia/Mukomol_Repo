@@ -11,53 +11,59 @@
     <Grid>
         <!-- Верхняя панель -->
         <Grid Background="#f1cf69" Height="80" VerticalAlignment="Top">
+
             <Image Source="/Image/logo-mukomol.png" 
-                   Width="50" Height="60" 
-                   HorizontalAlignment="Left" 
-                   VerticalAlignment="Center"  
-                   Margin="50,0,0,0"/>
+           Width="50" Height="60" 
+           HorizontalAlignment="Left" 
+           VerticalAlignment="Center"  
+           Margin="50,0,0,0"/>
+
             <TextBlock Text="Партнеры" 
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       Foreground="White"
-                       Margin="0,0,340,0"/>
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Center"
+        FontSize="16"
+        Foreground="White"
+        Margin="0,0,340,0"/>
+
             <TextBlock Text="Продукция" 
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       Foreground="White"
-                       Margin="0,0,245,0"
-                       MouseDown="ToProduct"/>
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Center"
+        FontSize="16"
+        Foreground="White"
+        Margin="0,0,245,0"
+        MouseDown="ToProduct"/>
+
             <TextBlock Text="Заказы" 
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       Foreground="White"
-                       Margin="0,0,180,0"/>
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Center"
+        FontSize="16"
+        Foreground="White"
+        Margin="0,0,180,0"/>
+
             <TextBlock Text="Отгрузки" 
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       Foreground="Gray"
-                       Margin="0,0,100,0"/>
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Center"
+        FontSize="16"
+        Foreground="Gray"
+        Margin="0,0,100,0"/>
+
             <TextBlock Text="Отчёты" 
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       Foreground="White"
-                       Margin="0,0,30,0"
-                       MouseDown="ToReport"/>
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Center"
+        FontSize="16"
+        Foreground="White"
+        Margin="0,0,30,0"
+        MouseDown="ToReport"/>
         </Grid>
 
         <!-- Стрелка Назад -->
         <Image Source="/Image/icon-strelka.png" 
-               HorizontalAlignment="Left" 
-               Height="33" 
+       HorizontalAlignment="Left" 
+       Height="33" 
                Margin="30,100,0,0" 
-               VerticalAlignment="Top" 
-               Width="37"
-               MouseDown="ToBack"/>
+       VerticalAlignment="Top" 
+       Width="37"
+       MouseDown="ToBack"/>
 
         <!-- Заголовок страницы -->
         <TextBlock Text="Отгрузки" 
@@ -200,8 +206,8 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                    </DataGrid.Columns>
+                </DataGrid>
 
         </Grid>
 
@@ -209,7 +215,7 @@
         <Button Content="Заказ отгружен" 
                 Width="160" FontSize="14" Padding="7"
                 HorizontalAlignment="Left" Margin="50,0,0,30" 
-                Background="#041e56" Foreground="White" 
+                Background="#041e56" Foreground="White"
                 VerticalAlignment="Bottom" Click="ToMarkShipped">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -221,7 +227,7 @@
         <Button Content="Заказ не отгружен" 
                 Width="180" FontSize="14" Padding="7"
                 HorizontalAlignment="Left" Margin="230,0,0,30" 
-                Background="#041e56" Foreground="White" 
+                Background="#041e56" Foreground="White"
                 VerticalAlignment="Bottom" Click="ToMarkNotShipped">
             <Button.Resources>
                 <Style TargetType="Border">

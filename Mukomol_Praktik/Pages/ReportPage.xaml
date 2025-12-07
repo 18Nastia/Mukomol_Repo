@@ -46,21 +46,21 @@
                         <Border Background="#041e56" CornerRadius="10" Margin="10,0,0,0">
                             <Button Content="Экспорт в Excel" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,5" Click="ExportToExcel_Click" FontWeight="Bold" FontSize="14"/>
                         </Border>
-                    </StackPanel>
+                </StackPanel>
 
                     <!-- Результаты -->
                     <Grid>
-                        <Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
 
                         <!-- Топ клиентов -->
                         <Border Background="White" CornerRadius="15" Padding="20" Margin="0,0,15,0" Effect="{DynamicResource DropShadowEffect}">
-                            <StackPanel>
+                    <StackPanel>
                                 <TextBlock Text="Топ клиентов" FontWeight="Bold" FontSize="18" Foreground="#041e56" Margin="0,0,0,15"/>
                                 <TextBlock x:Name="TopClientsText" Text="Клиент — Кол-во заказов" TextWrapping="Wrap" FontSize="16" Foreground="#041e56"/>
-                            </StackPanel>
+                    </StackPanel>
                         </Border>
 
                         <!-- Топ товаров -->
@@ -68,9 +68,9 @@
                             <StackPanel>
                                 <TextBlock Text="Топ товаров" FontWeight="Bold" FontSize="18" Foreground="#041e56" Margin="0,0,0,15"/>
                                 <TextBlock x:Name="TopProductsText" Text="Товар — Кол-во заказов" TextWrapping="Wrap" FontSize="16" Foreground="#041e56"/>
-                            </StackPanel>
+                    </StackPanel>
                         </Border>
-                    </Grid>
+                </Grid>
 
                     <!-- Статистика -->
                     <StackPanel Orientation="Vertical" Margin="0,25,0,0">
@@ -82,7 +82,7 @@
                         </Border>
                     </StackPanel>
 
-                </StackPanel>
+            </StackPanel>
             </Border>
         </Grid>
     </Grid>

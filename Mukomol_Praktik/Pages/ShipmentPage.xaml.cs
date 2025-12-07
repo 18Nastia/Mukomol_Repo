@@ -4,9 +4,17 @@ using Mukomol_Praktik.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Mukomol_Praktik.Pages
 {
@@ -74,7 +82,7 @@ namespace Mukomol_Praktik.Pages
                     {
                         view.Products += $"{product.IdFlourNavigation.NameFlour}\n";
                         view.Quantity += $"{product.Amount} г\n";
-                    }
+            }
                     else if (product.IdPasta != null)
                     {
                         // Packaging у пасты - int? (по твоей модели)
@@ -83,8 +91,8 @@ namespace Mukomol_Praktik.Pages
                             view.Products += $"{product.IdPastaNavigation.TypePasta}\n";
                             view.Quantity += $"{product.Amount} г\n";
                         }
-                        else
-                        {
+            else
+            {
                             view.Products += $"{product.IdPastaNavigation.TypePasta} {product.IdPastaNavigation.Brand} {product.IdPastaNavigation.Packaging.Value}г\n";
                             view.Quantity += $"{product.Amount} шт\n";
                         }
@@ -99,7 +107,7 @@ namespace Mukomol_Praktik.Pages
             }
 
             ShipmentsDataGrid.ItemsSource = shipments;
-        }
+            }
 
         private void ToBack(object sender, MouseButtonEventArgs e)
         {

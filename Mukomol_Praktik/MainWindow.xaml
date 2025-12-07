@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Mukomol_Praktik"
         mc:Ignorable="d"
         Title="Мукомол. Система учета заказов" Height="500" Width="800"
-        MinHeight="600" MinWidth="800"
+        MinHeight="700" MinWidth="1200"
         Icon="/Image/logo-mukomol.png"
         Background="White">
     <Grid>

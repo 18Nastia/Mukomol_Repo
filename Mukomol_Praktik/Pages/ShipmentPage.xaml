@@ -1,0 +1,233 @@
+﻿<Page x:Class="Mukomol_Praktik.Pages.ShipmentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mukomol_Praktik.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ShipmentPage">
+
+    <Grid>
+        <!-- Верхняя панель -->
+        <Grid Background="#f1cf69" Height="80" VerticalAlignment="Top">
+            <Image Source="/Image/logo-mukomol.png" 
+                   Width="50" Height="60" 
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Center"  
+                   Margin="50,0,0,0"/>
+            <TextBlock Text="Партнеры" 
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="White"
+                       Margin="0,0,340,0"/>
+            <TextBlock Text="Продукция" 
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="White"
+                       Margin="0,0,245,0"
+                       MouseDown="ToProduct"/>
+            <TextBlock Text="Заказы" 
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="White"
+                       Margin="0,0,180,0"/>
+            <TextBlock Text="Отгрузки" 
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="Gray"
+                       Margin="0,0,100,0"/>
+            <TextBlock Text="Отчёты" 
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="White"
+                       Margin="0,0,30,0"
+                       MouseDown="ToReport"/>
+        </Grid>
+
+        <!-- Стрелка Назад -->
+        <Image Source="/Image/icon-strelka.png" 
+               HorizontalAlignment="Left" 
+               Height="33" 
+               Margin="30,100,0,0" 
+               VerticalAlignment="Top" 
+               Width="37"
+               MouseDown="ToBack"/>
+
+        <!-- Заголовок страницы -->
+        <TextBlock Text="Отгрузки" 
+                   FontSize="30" 
+                   FontWeight="Bold" 
+                   Foreground="#041e56" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   Margin="0,90,0,0"/>
+
+        <!-- Поиск -->
+        <Grid VerticalAlignment="Top" Margin="50,140,50,0">
+            <TextBox x:Name="FindShipmentTextBox"
+                     MaxLength="100"
+                     FontSize="16"
+                     Height="30"
+                     HorizontalAlignment="Stretch"
+                     Margin="0,0,60,0"/>
+            <Button Content="Поиск" 
+                    Width="60" Height="30" FontSize="14" Padding="5" 
+                    HorizontalAlignment="Right" 
+                    Background="#041e56" 
+                    Foreground="White" 
+                    VerticalAlignment="Bottom"
+                    Click="ToSearchShipment"/>
+        </Grid>
+
+        <!-- DataGrid -->
+        <Grid Margin="50,240,50,75" Background="#FFFDE9">
+            <DataGrid x:Name="ShipmentsDataGrid" 
+          AutoGenerateColumns="False"
+           HeadersVisibility="Column"
+          BorderThickness="0"
+          GridLinesVisibility="None"
+          Background="White"
+          AlternatingRowBackground="White"
+          RowBackground="#FFFDE9"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          CanUserReorderColumns="False"
+          CanUserResizeColumns="False"
+          CanUserResizeRows="False"
+          CanUserSortColumns="False"
+          SelectionMode="Single">
+                <DataGrid.Columns>
+                    <!-- Клиент (полужирный, центр) -->
+                    <DataGridTextColumn Binding="{Binding Client}" Width="1.5*" Header="Клиент">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Foreground" Value="#041e56"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Товар (центровка + перенос текста) -->
+                    <DataGridTextColumn Binding="{Binding Products}" Width="2*" Header="Товар">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Foreground" Value="#041e56"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Кол-во -->
+                    <DataGridTextColumn Binding="{Binding Quantity}" Width="*" Header="Кол-во">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Foreground" Value="#041e56"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Дата -->
+                    <DataGridTextColumn Binding="{Binding OrderDate}" Width="1.2*" Header="Дата">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Foreground" Value="#041e56"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Дата отгрузки -->
+                    <DataGridTextColumn Binding="{Binding ShippingDate}" Width="1.5*" Header="Дата отгрузки">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Foreground" Value="#041e56"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Статус (полужирный) -->
+                    <DataGridTextColumn Binding="{Binding Status}" Width="*" Header="Статус">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Foreground" Value="#041e56"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Комментарий -->
+                    <DataGridTextColumn Binding="{Binding Comment}" Width="2*" Header="Комментарий">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Foreground" Value="#041e56"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
+        <!-- Кнопки действий -->
+        <Button Content="Заказ отгружен" 
+                Width="160" FontSize="14" Padding="7"
+                HorizontalAlignment="Left" Margin="50,0,0,30" 
+                Background="#041e56" Foreground="White" 
+                VerticalAlignment="Bottom" Click="ToMarkShipped">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button Content="Заказ не отгружен" 
+                Width="180" FontSize="14" Padding="7"
+                HorizontalAlignment="Left" Margin="230,0,0,30" 
+                Background="#041e56" Foreground="White" 
+                VerticalAlignment="Bottom" Click="ToMarkNotShipped">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Page>

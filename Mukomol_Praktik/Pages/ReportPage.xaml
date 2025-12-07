@@ -1,0 +1,89 @@
+﻿<Page x:Class="Mukomol_Praktik.Pages.ReportPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mukomol_Praktik.Pages"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="ReportPage">
+
+    <Grid Background="#f5f5f5">
+        <!-- Верхняя панель -->
+        <Grid Background="#f1cf69" Height="80" VerticalAlignment="Top">
+            <Image Source="/Image/logo-mukomol.png" Width="60" Height="70" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"/>
+            <TextBlock Text="Партнеры" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Foreground="White" Margin="0,0,340,0"/>
+            <TextBlock Text="Продукция" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Foreground="White" Margin="0,0,245,0" MouseDown="ToProduct"/>
+            <TextBlock Text="Заказы" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Foreground="White" Margin="0,0,180,0"/>
+            <TextBlock Text="Отгрузки" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Foreground="White" Margin="0,0,100,0" MouseDown="ToShipment"/>
+            <TextBlock Text="Отчёты" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Foreground="Gray" Margin="0,0,30,0"/>
+        </Grid>
+
+        <!-- Стрелка Назад -->
+        <Image Source="/Image/icon-strelka.png" HorizontalAlignment="Left" Height="35" Margin="30,120,0,0" VerticalAlignment="Top" Width="37" MouseDown="ToBack"/>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Отчёты" FontSize="36" FontWeight="Bold" Foreground="#041e56" HorizontalAlignment="Center" Margin="0,110,0,0"/>
+
+        <!-- Основное содержимое -->
+        <Grid Margin="50,170,50,80">
+            <Border Background="#FFFDE9" CornerRadius="20" Padding="25" >
+                <StackPanel>
+
+                    <!-- Период и кнопки -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,25">
+                        <TextBlock Text="Выберите период с" VerticalAlignment="Center" FontWeight="Bold" FontSize="16" Foreground="#041e56"/>
+                        <DatePicker x:Name="StartDatePicker" SelectedDate="{x:Static sys:DateTime.Today}" Width="140" Margin="10,0,0,0"/>
+                        <TextBlock Text="по" VerticalAlignment="Center" FontWeight="Bold" FontSize="16" Foreground="#041e56" Margin="10,0,0,0"/>
+                        <DatePicker x:Name="EndDatePicker" SelectedDate="{x:Static sys:DateTime.Today}" Width="140" Margin="10,0,0,0"/>
+
+                        <!-- Кнопки с закруглёнными углами через Border -->
+                        <Border Background="#041e56" CornerRadius="10" Margin="20,0,0,0" >
+                            <Button Content="Сформировать отчет" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,5" Click="GenerateReport_Click" FontWeight="Bold" FontSize="14"/>
+                        </Border>
+
+                        <Border Background="#041e56" CornerRadius="10" Margin="10,0,0,0">
+                            <Button Content="Экспорт в Excel" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,5" Click="ExportToExcel_Click" FontWeight="Bold" FontSize="14"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Результаты -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Топ клиентов -->
+                        <Border Background="White" CornerRadius="15" Padding="20" Margin="0,0,15,0" Effect="{DynamicResource DropShadowEffect}">
+                            <StackPanel>
+                                <TextBlock Text="Топ клиентов" FontWeight="Bold" FontSize="18" Foreground="#041e56" Margin="0,0,0,15"/>
+                                <TextBlock x:Name="TopClientsText" Text="Клиент — Кол-во заказов" TextWrapping="Wrap" FontSize="16" Foreground="#041e56"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Топ товаров -->
+                        <Border Background="White" CornerRadius="15" Padding="20" Margin="15,0,0,0" Grid.Column="1" Effect="{DynamicResource DropShadowEffect}">
+                            <StackPanel>
+                                <TextBlock Text="Топ товаров" FontWeight="Bold" FontSize="18" Foreground="#041e56" Margin="0,0,0,15"/>
+                                <TextBlock x:Name="TopProductsText" Text="Товар — Кол-во заказов" TextWrapping="Wrap" FontSize="16" Foreground="#041e56"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- Статистика -->
+                    <StackPanel Orientation="Vertical" Margin="0,25,0,0">
+                        <Border Background="White" CornerRadius="15" Padding="15" Margin="0,0,0,10" Effect="{DynamicResource DropShadowEffect}">
+                            <TextBlock x:Name="TotalOrdersText" Text="Всего заказов:" FontWeight="Bold" FontSize="16" Foreground="#041e56"/>
+                        </Border>
+                        <Border Background="White" CornerRadius="15" Padding="15" Effect="{DynamicResource DropShadowEffect}">
+                            <TextBlock x:Name="ShippedOrdersText" Text="Отгружено заказов:" FontWeight="Bold" FontSize="16" Foreground="#041e56"/>
+                        </Border>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

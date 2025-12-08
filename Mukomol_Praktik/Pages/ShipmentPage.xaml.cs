@@ -47,12 +47,14 @@ namespace Mukomol_Praktik.Pages
         {
             shipments.Clear();
 
+            // Загружаем заказы с навигациями
             var orders = context.Orders
                 .Include(o => o.IdPartnerNavigation)
                 .Include(o => o.Products)
                     .ThenInclude(p => p.IdFlourNavigation)
                 .Include(o => o.Products)
                     .ThenInclude(p => p.IdPastaNavigation)
+                .Where(o => o.StatusOrder == "Отгружен" || o.StatusOrder == "Не отгружен") // Фильтр по статусу
                 .ToList();
 
             var allProducts = context.Products
@@ -82,24 +84,22 @@ namespace Mukomol_Praktik.Pages
                     {
                         view.Products += $"{product.IdFlourNavigation.NameFlour}\n";
                         view.Quantity += $"{product.Amount} г\n";
-            }
+                    }
                     else if (product.IdPasta != null)
                     {
-                        // Packaging у пасты - int? (по твоей модели)
                         if (!product.IdPastaNavigation.Packaging.HasValue)
                         {
                             view.Products += $"{product.IdPastaNavigation.TypePasta}\n";
                             view.Quantity += $"{product.Amount} г\n";
                         }
-            else
-            {
+                        else
+                        {
                             view.Products += $"{product.IdPastaNavigation.TypePasta} {product.IdPastaNavigation.Brand} {product.IdPastaNavigation.Packaging.Value}г\n";
                             view.Quantity += $"{product.Amount} шт\n";
                         }
                     }
                 }
 
-                // Убираем последний символ переноса строки
                 if (view.Products.Length > 0) view.Products = view.Products.TrimEnd('\n');
                 if (view.Quantity.Length > 0) view.Quantity = view.Quantity.TrimEnd('\n');
 
@@ -107,7 +107,7 @@ namespace Mukomol_Praktik.Pages
             }
 
             ShipmentsDataGrid.ItemsSource = shipments;
-            }
+        }
 
         private void ToBack(object sender, MouseButtonEventArgs e)
         {

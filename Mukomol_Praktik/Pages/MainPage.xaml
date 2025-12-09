@@ -7,20 +7,28 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Title="MainPage">
-    <ScrollViewer  VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid Background="#f1cf69" Height="80" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                <Image Source="/Image/logo-mukomol.png"  Width="50" Height="60" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="50,0,0,0"/>
-                <TextBlock Text="АО ВКХП Мукомол" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Center"
-                FontSize="24"
-                Foreground="White"
-                FontWeight="Bold"
-                Margin="0,0,50,0"/>
+    <ScrollViewer x:Name="MainScrollViewer" VerticalScrollBarVisibility="Auto">
+        <Grid x:Name="MainGrid">
+            <Grid x:Name="HeaderGrid" Background="#f1cf69" Height="80" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <Image x:Name="LogoImage" 
+                       Source="/Image/logo-mukomol.png"  
+                       Width="50" 
+                       Height="60" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Center"  
+                       Margin="50,0,0,0"/>
+                <TextBlock x:Name="CompanyNameTextBlock"
+                           Text="АО ВКХП Мукомол" 
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment="Center"
+                           FontSize="24"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           Margin="0,0,50,0"/>
             </Grid>
-            
-            <Image Source="/Image/icon-strelka.png" 
+
+            <Image x:Name="BackArrowImage"
+                   Source="/Image/icon-strelka.png" 
                    HorizontalAlignment="Left" 
                    Height="33" 
                    Margin="30,125,0,0" 
@@ -28,89 +36,104 @@
                    Width="37"
                    MouseDown="ToBack">
             </Image>
-            <TextBlock Text="Система учёта заказов" 
-                   FontSize="40" 
-                   FontWeight="Bold" 
-                   Foreground="#041e56" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Top" 
-                   Margin="0,110,0,0"/>
-            <Grid Margin="50,170,50,30" Height="360" Background="#FFFDE9">
-                <Button Height="60" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Top"
-                    Margin="10" 
-                    Background="#041e56" 
-                    Content="Партнеры" 
-                    Foreground="White" 
-                    FontSize="24" 
-                    BorderThickness="0" 
-                    BorderBrush="Transparent" 
-                    Click="ToPartners">
+
+            <TextBlock x:Name="TitleTextBlock"
+                       Text="Система учёта заказов" 
+                       FontSize="40" 
+                       FontWeight="Bold" 
+                       Foreground="#041e56" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Top" 
+                       Margin="0,110,0,0"/>
+
+            <Grid x:Name="MenuGrid" 
+                  Margin="50,170,50,30" 
+                  Height="360" 
+                  Background="#FFFDE9">
+                <Button x:Name="PartnersButton"
+                        Height="60" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top"
+                        Margin="10" 
+                        Background="#041e56" 
+                        Content="Партнеры" 
+                        Foreground="White" 
+                        FontSize="24" 
+                        BorderThickness="0" 
+                        BorderBrush="Transparent" 
+                        Click="ToPartners">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Height="60" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Top"
-                    Margin="10,80,10,10" 
-                    Background="#041e56" 
-                    Content="Продукция" 
-                    Foreground="White" 
-                    FontSize="24" 
-                    BorderThickness="0" 
-                    BorderBrush="Transparent">
+                <Button x:Name="ProductsButton"
+                        Height="60" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top"
+                        Margin="10,80,10,10" 
+                        Background="#041e56" 
+                        Content="Продукция" 
+                        Foreground="White" 
+                        FontSize="24" 
+                        BorderThickness="0" 
+                        BorderBrush="Transparent" 
+                        Click="ToProductPage">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Height="60" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Top"
-                    Margin="10,150,10,10" 
-                    Background="#041e56" 
-                    Content="Заказы" 
-                    Foreground="White" 
-                    FontSize="24" 
-                    BorderThickness="0" 
-                    BorderBrush="Transparent" Click="ToOrders">
+                <Button x:Name="OrdersButton"
+                        Height="60" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top"
+                        Margin="10,150,10,10" 
+                        Background="#041e56" 
+                        Content="Заказы" 
+                        Foreground="White" 
+                        FontSize="24" 
+                        BorderThickness="0" 
+                        BorderBrush="Transparent" 
+                        Click="ToOrders">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Height="60" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Top"
-                    Margin="10,220,10,10" 
-                    Background="#041e56" 
-                    Content="Отгрузки" 
-                    Foreground="White" 
-                    FontSize="24" 
-                    BorderThickness="0" 
-                    BorderBrush="Transparent">
+                <Button x:Name="ShipmentsButton"
+                        Height="60" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top"
+                        Margin="10,220,10,10" 
+                        Background="#041e56" 
+                        Content="Отгрузки" 
+                        Foreground="White" 
+                        FontSize="24" 
+                        BorderThickness="0" 
+                        BorderBrush="Transparent" 
+                        Click="ToShipmentPage">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Height="60" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Top"
-                    Margin="10,290,10,10" 
-                    Background="#041e56" 
-                    Content="Отчёты" 
-                    Foreground="White" 
-                    FontSize="24" 
-                    BorderThickness="0" 
-                    BorderBrush="Transparent">
+                <Button x:Name="ReportsButton"
+                        Height="60" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top"
+                        Margin="10,290,10,10" 
+                        Background="#041e56" 
+                        Content="Отчёты" 
+                        Foreground="White" 
+                        FontSize="24" 
+                        BorderThickness="0" 
+                        BorderBrush="Transparent" 
+                        Click="ToReportPage">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="15"/>

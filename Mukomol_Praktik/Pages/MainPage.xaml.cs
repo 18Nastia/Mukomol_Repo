@@ -39,5 +39,20 @@ namespace Mukomol_Praktik.Pages
         {
             NavigationService.Navigate(new Uri("/Pages/OrderPage.xaml", UriKind.Relative));
         }
+
+        private void ToProductPage(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/ProductPage.xaml", UriKind.Relative));
+        }
+
+        private void ToReportPage(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/ReportPage.xaml", UriKind.Relative));
+        }
+
+        private void ToShipmentPage(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/ShipmentPage.xaml", UriKind.Relative));
+        }
     }
 }

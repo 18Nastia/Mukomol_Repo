@@ -6,43 +6,146 @@
       xmlns:local="clr-namespace:Mukomol_Praktik.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddPartnerPage">
+      Title="AddPartnerPage"
+      x:Name="AddPartnerPageControl">
 
-    <Grid Background="#f1cf69">
+    <Grid Background="#f1cf69" x:Name="MainGrid">
         <Image Source="/Image/icon-strelka.png" 
             HorizontalAlignment="Left" 
             Height="33" 
             Margin="30,40,0,0" 
             VerticalAlignment="Top" 
             Width="37"
-            MouseDown="ToBack">
+            MouseDown="ToBack"
+            x:Name="BackArrowImage">
         </Image>
-        
+
         <Grid HorizontalAlignment="Center" 
               VerticalAlignment="Center" 
               Width="400" Height="400" 
-              Margin="0,30,0,0">
-            <TextBlock Text="Добавление партнёра"
-    FontSize="30" 
-    FontWeight="Bold" 
-    Foreground="#041e56" 
-    HorizontalAlignment="Center" 
-    VerticalAlignment="Center" 
-    Margin="0,0,0,370"/>
-            <TextBlock Text="Введите название компании партнёров" FontSize="16" Foreground="#041e56" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,250"/>
-            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200" Width="200"/>
-            <TextBlock Text="Загрузьте логотип" FontSize="16" Foreground="#041e56" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,130"/>
-            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" Width="200" Height="120"/>
-            <TextBlock Text="Введите контактный номер" FontSize="16" Foreground="#041e56" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,200,0,0"/>
-            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,250,0,0" Width="200"/>
-            <Button Content="Сохранить" Width="90" FontSize="14" Padding="7" HorizontalAlignment="Center" Margin="0,330,120,0" Background="#041e56" Foreground="White" VerticalAlignment="Center">
+              Margin="0,30,0,0"
+              x:Name="ContentGrid">
+            <TextBlock x:Name="namePartnerPage" 
+                Text="Добавление партнёра"
+                FontSize="30" 
+                FontWeight="Bold" 
+                Foreground="#041e56" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Margin="0,0,0,370"/>
+
+            <TextBlock Text="Введите название компании партнёров" 
+                       FontSize="16" 
+                       Foreground="#041e56" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Margin="0,0,0,250"
+                       x:Name="CompanyNameLabelTextBlock"/>
+
+            <TextBox x:Name="nameCompanyTextBox" 
+                     FontSize="14" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center" 
+                     Margin="0,0,0,200" 
+                     Width="200"/>
+
+            <TextBlock Text="Загрузьте логотип" 
+                       FontSize="16" 
+                       Foreground="#041e56" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Margin="0,0,0,130"
+                       x:Name="UploadLogoLabelTextBlock"/>
+
+            <Grid x:Name="DropArea" 
+                  HorizontalAlignment="Center" 
+                  Background="White" 
+                  VerticalAlignment="Center" 
+                  Margin="0,20,0,0" 
+                  Width="280" 
+                  Height="120" 
+                  AllowDrop="True"
+                  Drop="DropImage">
+                <StackPanel VerticalAlignment="Center" 
+                            HorizontalAlignment="Center"
+                            x:Name="DropAreaStackPanel">
+                    <TextBlock Text="Перетащите изображение сюда" 
+                               FontSize="14" 
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               x:Name="DragDropTextBlock"/>
+                    <TextBlock Text="или" 
+                               Margin="0,10,0,0"
+                               HorizontalAlignment="Center"
+                               x:Name="OrTextBlock"/>
+                    <Button Content="Выбрать файл" 
+                            Width="120" 
+                            Height="35" 
+                            Margin="0,10,0,0"
+                            Background="#041e56"
+                            Foreground="White"
+                            FontSize="14"
+                            Click="ChoiceFileButton"
+                            x:Name="SelectFileButton">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+                <Image x:Name="PreviewImage" 
+                       Width="150" 
+                       Height="150"
+                       Stretch="Uniform"
+                       Visibility="Collapsed"/>
+            </Grid>
+
+            <TextBlock Text="Введите контактный номер" 
+                       FontSize="16" 
+                       Foreground="#041e56" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Margin="0,200,0,0"
+                       x:Name="PhoneNumberLabelTextBlock"/>
+
+            <TextBox x:Name="numberTextBox" 
+                     FontSize="14" 
+                     MaxLength="11" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center" 
+                     Margin="0,250,0,0" 
+                     Width="200"/>
+
+            <Button Content="Сохранить" 
+                    Width="90" 
+                    FontSize="14" 
+                    Padding="7" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,330,120,0" 
+                    Background="#041e56" 
+                    Foreground="White" 
+                    VerticalAlignment="Center" 
+                    Click="AddPartner"
+                    x:Name="SaveButton">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Отменить" Width="90" FontSize="14" Padding="7" HorizontalAlignment="Center" Margin="120,330,0,0" Background="#041e56" Foreground="White" VerticalAlignment="Center">
+
+            <Button Content="Отменить" 
+                    Width="90" 
+                    FontSize="14" 
+                    Padding="7" 
+                    HorizontalAlignment="Center" 
+                    Margin="120,330,0,0" 
+                    Background="#041e56" 
+                    Foreground="White" 
+                    VerticalAlignment="Center" 
+                    Click="CancelAddPartner"
+                    x:Name="CancelButton">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>

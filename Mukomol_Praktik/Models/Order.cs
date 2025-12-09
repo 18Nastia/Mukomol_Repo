@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Mukomol_Praktik;
+namespace Mukomol_Praktik.Models;
 
 public partial class Order
 {

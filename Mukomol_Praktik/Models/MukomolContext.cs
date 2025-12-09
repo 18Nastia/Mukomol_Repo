@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Mukomol_Praktik;
+
+namespace Mukomol_Praktik.Models;
 
 public partial class MukomolContext : DbContext
 {

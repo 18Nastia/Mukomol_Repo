@@ -8,73 +8,242 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OrderPage">
 
-    <Grid>
-        <Grid Background="#f1cf69" Height="80" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <Image Source="/Image/logo-mukomol.png" 
-               Width="50" Height="60" 
+    <Grid x:Name="MainGrid">
+        <Grid x:Name="HeaderGrid" Background="#f1cf69" Height="80" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Image x:Name="LogoImage" 
+                   Source="/Image/logo-mukomol.png" 
+                   Width="50" Height="60" 
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Center"  
+                   Margin="50,0,0,0"
+                   MouseDown="ToMain"/>
+            <TextBlock x:Name="PartnersTextBlock" 
+                       Text="Партнеры" 
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="White"
+                       Margin="0,0,340,0" 
+                       MouseDown="ToPartner"/>
+            <TextBlock x:Name="ProductsTextBlock"
+                       Text="Продукция"
+                       MouseDown="ToProduct"
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="White"
+                       Margin="0,0,245,0"/>
+            <TextBlock x:Name="OrdersTextBlock" 
+                       Text="Заказы" 
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="Gray"
+                       Margin="0,0,180,0"/>
+            <TextBlock x:Name="ShipmentsTextBlock" 
+                       Text="Отгрузки" 
+                       MouseDown="ToShipment"
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="White"
+                       Margin="0,0,100,0"/>
+            <TextBlock x:Name="ReportsTextBlock"
+                       Text="Отчёты"
+                       MouseDown="ToReport"
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="White"
+                       Margin="0,0,30,0"/>
+        </Grid>
+
+        <Image x:Name="BackArrowImage" 
+               Source="/Image/icon-strelka.png" 
                HorizontalAlignment="Left" 
-               VerticalAlignment="Center"  
-               Margin="50,0,0,0"
-               MouseDown="ToMain"/>
-            <TextBlock Text="Партнеры" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Center"
-            FontSize="16"
-            Foreground="White"
-            Margin="0,0,340,0" MouseDown="ToPartner"/>
-            <TextBlock Text="Продукция" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Center"
-            FontSize="16"
-            Foreground="White"
-            Margin="0,0,245,0"/>
-            <TextBlock Text="Заказы" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Center"
-            FontSize="16"
-            Foreground="Gray"
-            Margin="0,0,180,0"/>
-            <TextBlock Text="Отгрузки" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Center"
-            FontSize="16"
-            Foreground="White"
-            Margin="0,0,100,0"/>
-            <TextBlock Text="Отчёты" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Center"
-            FontSize="16"
-            Foreground="White"
-            Margin="0,0,30,0"/>
-        </Grid>
-
-        <Image Source="/Image/icon-strelka.png" 
-        HorizontalAlignment="Left" 
-        Height="33" 
-        Margin="30,120,0,0" 
-        VerticalAlignment="Top" 
-        Width="37"
-        MouseDown="ToBack">
+               Height="33" 
+               Margin="30,100,0,0" 
+               VerticalAlignment="Top" 
+               Width="37"
+               MouseDown="ToBack">
         </Image>
-        <TextBlock Text="Заказы" 
-        FontSize="30" 
-        FontWeight="Bold" 
-        Foreground="#041e56" 
-        HorizontalAlignment="Center" 
-        VerticalAlignment="Top" 
-        Margin="0,110,0,0"/>
+        <TextBlock x:Name="OrdersTitleTextBlock" 
+                   Text="Заказы" 
+                   FontSize="30" 
+                   FontWeight="Bold" 
+                   Foreground="#041e56" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   Margin="0,90,0,0"/>
 
-        <Grid Margin="50,170,50,80" Background="#FFFDE9">
-
+        <Grid x:Name="SearchGrid" 
+              VerticalAlignment="Top"
+              Margin="50,140,50,10">
+            <TextBox x:Name="FindOrderTextBox"
+                     MaxLength="100"
+                     FontSize="16"
+                     Height="30"
+                     HorizontalAlignment="Stretch"
+                     Margin="0,0,60,0"/>
+            <Button x:Name="SearchButton" 
+                    Content="Поиск" 
+                    Width="60" 
+                    Height="30" 
+                    FontSize="14" 
+                    Padding="5" 
+                    HorizontalAlignment="Right" 
+                    Background="#041e56" 
+                    Foreground="White" 
+                    VerticalAlignment="Bottom" 
+                    Click="FindOrder"/>
         </Grid>
-        <Button Content="Добавить" Width="90" FontSize="14" Padding="7" HorizontalAlignment="Left" Margin="50,0,0,30" Background="#041e56" Foreground="White" VerticalAlignment="Bottom" Click="ToAddOrder">
+
+        <Grid x:Name="FilterGrid" 
+              VerticalAlignment="Top"
+              Margin="50,190,50,10">
+            <ComboBox x:Name="SortComboBox" 
+                      HorizontalAlignment="Stretch" 
+                      FontSize="16" 
+                      Height="30" 
+                      Margin="0,0,60,0"></ComboBox>
+            <Button x:Name="FilterButton" 
+                    Content="Фильтр" 
+                    Width="60" 
+                    Height="30" 
+                    FontSize="14" 
+                    Padding="5" 
+                    HorizontalAlignment="Right" 
+                    Background="#041e56" 
+                    Foreground="White" 
+                    VerticalAlignment="Bottom" 
+                    Click="FilterOrders"/>
+        </Grid>
+
+        <Grid x:Name="OrdersContainerGrid" 
+              Margin="50,240,50,75" 
+              Background="#FFFDE9">
+            <DataGrid x:Name="OrdersDataGrid" 
+                      AutoGenerateColumns="False"
+                      HeadersVisibility="None"
+                      BorderThickness="0"
+                      GridLinesVisibility="None"
+                      Background="White"
+                      AlternatingRowBackground="White"
+                      RowBackground="#FFFDE9"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="False"
+                      CanUserResizeRows="False"
+                      CanUserSortColumns="False"
+                      SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="CompanyNameColumn" 
+                                        Binding="{Binding companyName}" 
+                                        Width="0.8*"
+                                        FontSize="16"
+                                        FontWeight="Bold" 
+                                        Foreground="#041e56">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn x:Name="ProductsColumn" 
+                                        Binding="{Binding productsOrder}" 
+                                        Width="4*"
+                                        FontSize="16"
+                                        Foreground="#041e56">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn x:Name="CountProductsColumn" 
+                                        Binding="{Binding countProducts}" 
+                                        Width="*"
+                                        FontSize="16">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="0,1,0,1"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn x:Name="DateColumn" 
+                                        Binding="{Binding dateOrder}" 
+                                        Width="0.8*"
+                                        FontSize="16"
+                                        Foreground="#041e56">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn x:Name="StatusColumn" 
+                                        Binding="{Binding statusOrder}" 
+                                        Width="*"
+                                        FontSize="16"
+                                        FontWeight="Bold" 
+                                        Foreground="#041e56">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Button x:Name="AddOrderButton" 
+                Content="Добавить" 
+                Width="90" 
+                FontSize="14" 
+                Padding="7" 
+                HorizontalAlignment="Left" 
+                Margin="50,0,0,30" 
+                Background="#041e56" 
+                Foreground="White" 
+                VerticalAlignment="Bottom" 
+                Click="ToAddOrder">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Изменить" Width="90" FontSize="14" Padding="7" HorizontalAlignment="Left" Margin="150,0,0,30" Background="#041e56" Foreground="White" VerticalAlignment="Bottom" Click="ToEditOrder">
+
+        <Button x:Name="EditOrderButton" 
+                Content="Изменить" 
+                Width="90" 
+                FontSize="14" 
+                Padding="7" 
+                HorizontalAlignment="Left" 
+                Margin="150,0,0,30" 
+                Background="#041e56" 
+                Foreground="White" 
+                VerticalAlignment="Bottom" 
+                Click="ToEditOrder">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>

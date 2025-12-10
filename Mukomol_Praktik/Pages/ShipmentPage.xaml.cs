@@ -54,7 +54,7 @@ namespace Mukomol_Praktik.Pages
                     .ThenInclude(p => p.IdFlourNavigation)
                 .Include(o => o.Products)
                     .ThenInclude(p => p.IdPastaNavigation)
-                .Where(o => o.StatusOrder == "Отгружен" || o.StatusOrder == "Не отгружен" || o.StatusOrder == "Отправлен") // Фильтр по статусу
+                .Where(o => o.StatusOrder == "Отгружен" || o.StatusOrder == "Не отгружен" || o.StatusOrder == "Отправлен" || o.StatusOrder == "Отменен") // Фильтр по статусу
                 .ToList();
 
             var allProducts = context.Products

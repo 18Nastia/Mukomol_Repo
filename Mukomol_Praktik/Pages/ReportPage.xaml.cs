@@ -35,10 +35,11 @@ namespace Mukomol_Praktik.Pages
             }
             else
             {
-                // Можно, например, вывести сообщение или просто ничего не делать
-                MessageBox.Show("Нет предыдущей страницы для возврата.", "Навигация", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Назад переходить некуда", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+
 
         private void ToMain(object sender, MouseButtonEventArgs e)
         {

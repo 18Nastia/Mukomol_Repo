@@ -111,8 +111,17 @@ namespace Mukomol_Praktik.Pages
 
         private void ToBack(object sender, MouseButtonEventArgs e)
         {
-            NavigationService?.GoBack();
+            if (NavigationService != null && NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("Назад переходить некуда", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
+
+
 
         private void ToMain(object sender, MouseButtonEventArgs e)
         {

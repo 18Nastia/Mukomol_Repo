@@ -22,17 +22,17 @@ namespace Mukomol_Praktik.Pages
     /// </summary>
     public class OrderView
     {
-        public int idOrderView {  get; set; }
+        public int idOrderView { get; set; }
         public string companyName { get; set; }
-        public string productsOrder {  get; set; }
+        public string productsOrder { get; set; }
         public string countProducts { get; set; }
-        public DateOnly dateOrder {  get; set; }
+        public DateOnly dateOrder { get; set; }
         public string statusOrder { get; set; }
     }
     public partial class OrderPage : Page
     {
         private MukomolContext context;
-        private List<OrderView> orderViews {  get; set; }
+        private List<OrderView> orderViews { get; set; }
         private List<OrderView> filteredOrderViews { get; set; }
 
         public OrderPage()
@@ -69,68 +69,63 @@ namespace Mukomol_Praktik.Pages
             {
                 foreach (var order in orders)
                 {
-                    OrderView view = new OrderView();
-                    view.idOrderView = order.IdOrder;
-                    if (order.IdPartnerNavigation != null)
+                    if (order.StatusOrder.ToLower() == "принят" || order.StatusOrder.ToLower() == "в обработке" || order.StatusOrder.ToLower() == "готов к отправке")
                     {
-                        view.companyName = order.IdPartnerNavigation.NameCompany;
-                    }
-                    view.statusOrder = order.StatusOrder;
-                    view.dateOrder = order.DateOrder;
-                    var orderProducts = allProducts
-            .Where(p => p.IdOrder == order.IdOrder)
-            .ToList();
-                    if (context.Products != null)
-                    {
-                        foreach (var productOrder in orderProducts)
+                        OrderView view = new OrderView();
+                        view.idOrderView = order.IdOrder;
+                        if (order.IdPartnerNavigation != null)
                         {
-                            if (productOrder.IdOrder == view.idOrderView)
+                            view.companyName = order.IdPartnerNavigation.NameCompany;
+                        }
+                        view.statusOrder = order.StatusOrder;
+                        view.dateOrder = order.DateOrder;
+                        var orderProducts = allProducts
+                .Where(p => p.IdOrder == order.IdOrder)
+                .ToList();
+                        if (context.Products != null)
+                        {
+                            foreach (var productOrder in orderProducts)
                             {
-                                if (productOrder.IdFlour != null)
+                                if (productOrder.IdOrder == view.idOrderView)
                                 {
-                                    view.productsOrder += $"{productOrder.IdFlourNavigation.NameFlour}\n";
-                                    view.countProducts += $"{productOrder.Amount} г\n";
-                                }
-                                else if (productOrder.IdPasta != null && productOrder.IdPastaNavigation.Packaging == null)
-                                {
-                                    view.productsOrder += $"{productOrder.IdPastaNavigation.TypePasta}\n";
-                                    view.countProducts += $"{productOrder.Amount} г\n";
-                                }
-                                else if (productOrder.IdPasta != null && productOrder.IdPastaNavigation.Packaging != null)
-                                {
-                                    view.productsOrder += $"{productOrder.IdPastaNavigation.TypePasta} {productOrder.IdPastaNavigation.Brand} {productOrder.IdPastaNavigation.Packaging}г\n";
-                                    view.countProducts += $"{productOrder.Amount} шт\n";
+                                    if (productOrder.IdFlour != null)
+                                    {
+                                        view.productsOrder += $"{productOrder.IdFlourNavigation.NameFlour}\n";
+                                        view.countProducts += $"{productOrder.Amount} г\n";
+                                    }
+                                    else if (productOrder.IdPasta != null && productOrder.IdPastaNavigation.Packaging == null)
+                                    {
+                                        view.productsOrder += $"{productOrder.IdPastaNavigation.TypePasta}\n";
+                                        view.countProducts += $"{productOrder.Amount} г\n";
+                                    }
+                                    else if (productOrder.IdPasta != null && productOrder.IdPastaNavigation.Packaging != null)
+                                    {
+                                        view.productsOrder += $"{productOrder.IdPastaNavigation.TypePasta} {productOrder.IdPastaNavigation.Brand} {productOrder.IdPastaNavigation.Packaging}г\n";
+                                        view.countProducts += $"{productOrder.Amount} шт\n";
+                                    }
                                 }
                             }
-                        }
-                        if (!string.IsNullOrEmpty(view.productsOrder) && view.productsOrder.Length > 0)
-                        {
-                            view.productsOrder = view.productsOrder.TrimEnd('\n');
-                        }
+                            if (!string.IsNullOrEmpty(view.productsOrder) && view.productsOrder.Length > 0)
+                            {
+                                view.productsOrder = view.productsOrder.TrimEnd('\n');
+                            }
 
-                        if (!string.IsNullOrEmpty(view.countProducts) && view.countProducts.Length > 0)
-                        {
-                            view.countProducts = view.countProducts.TrimEnd('\n');
+                            if (!string.IsNullOrEmpty(view.countProducts) && view.countProducts.Length > 0)
+                            {
+                                view.countProducts = view.countProducts.TrimEnd('\n');
+                            }
                         }
+                        orderViews.Add(view);
                     }
-                    orderViews.Add(view);
+
                 }
             }
             OrdersDataGrid.ItemsSource = orderViews;
         }
         private void ToBack(object sender, MouseButtonEventArgs e)
         {
-            if (NavigationService != null && NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-            }
-            else
-            {
-                MessageBox.Show("Назад переходить некуда", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            NavigationService.GoBack();
         }
-
-
         private void ToMain(object sender, MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
@@ -143,9 +138,10 @@ namespace Mukomol_Praktik.Pages
         private void ToEditOrder(object sender, RoutedEventArgs e)
         {
             OrderView editOrderView = OrdersDataGrid.SelectedItem as OrderView;
-            Order editOrder = context.Orders.Find(editOrderView.idOrderView);
-            if (editOrder != null)
+
+            if (editOrderView != null && context.Orders.Find(editOrderView.idOrderView) != null)
             {
+                Order editOrder = context.Orders.Find(editOrderView.idOrderView);
                 EditChoiceDoingPage editChoiceDoingPage = new EditChoiceDoingPage(editOrder);
                 NavigationService.Navigate(editChoiceDoingPage);
             }
@@ -169,10 +165,10 @@ namespace Mukomol_Praktik.Pages
         private void ToShipment(object sender, MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/ShipmentPage.xaml", UriKind.Relative));
-        }        
+        }
         private void ToReport(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/ReportPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/PartnerPage.xaml", UriKind.Relative));
         }
 
         private void FindOrder(object sender, RoutedEventArgs e)
@@ -214,7 +210,7 @@ namespace Mukomol_Praktik.Pages
                 OrdersDataGrid.ItemsSource = null;
                 OrdersDataGrid.ItemsSource = orderViews;
                 filteredOrderViews = orderViews;
-            }    
+            }
         }
 
         private void FilterOrders(object sender, RoutedEventArgs e)
@@ -223,7 +219,7 @@ namespace Mukomol_Praktik.Pages
             {
                 filteredOrderViews = orderViews;
             }
-            switch(SortComboBox.Text)
+            switch (SortComboBox.Text)
             {
                 case "Дате (новые сверху)":
                     filteredOrderViews = filteredOrderViews

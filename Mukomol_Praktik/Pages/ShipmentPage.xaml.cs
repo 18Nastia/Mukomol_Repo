@@ -114,15 +114,27 @@ namespace Mukomol_Praktik.Pages
             NavigationService?.GoBack();
         }
 
+        private void ToMain(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
+        }
+        private void ToPartner(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/PartnerPage.xaml", UriKind.Relative));
+        }
         private void ToProduct(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new ProductPage());
+            NavigationService.Navigate(new Uri("/Pages/ProductPage.xaml", UriKind.Relative));
         }
-
         private void ToReport(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new ReportPage());
+            NavigationService.Navigate(new Uri("/Pages/ReportPage.xaml", UriKind.Relative));
         }
+        private void ToOrder(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/OrderPage.xaml", UriKind.Relative));
+        }
+
 
         private void ToSearchShipment(object sender, RoutedEventArgs e)
         {

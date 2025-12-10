@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mukomol_Praktik.Models;
+using Mukomol_Praktik.Pages.AddOrderModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Windows.Input;
 
 namespace Mukomol_Praktik.Pages
 {
-    public class ProductOrder : ProductView
+    public class ProductOrder : OrderProductView
     {
         public int idProductOrder { get; set; }
     }

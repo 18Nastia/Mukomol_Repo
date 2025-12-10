@@ -64,7 +64,7 @@ namespace Mukomol_Praktik.Pages
         }
         private void ToReport(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/PartnerPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/ReportPage.xaml", UriKind.Relative));
         }
 
         private void ToAddPartner(object sender, RoutedEventArgs e)
@@ -118,11 +118,9 @@ namespace Mukomol_Praktik.Pages
                             "Ошибка",
                             MessageBoxButton.OK,
                             MessageBoxImage.Error);
-            }
-                
+            }          
             
         }
-
       
     }
 }

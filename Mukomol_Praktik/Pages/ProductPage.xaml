@@ -77,14 +77,16 @@
            Width="50" Height="60"
            HorizontalAlignment="Left"
            VerticalAlignment="Center"
-           Margin="50,0,0,0"/>
+           Margin="50,0,0,0"
+           MouseDown="ToMain"/>
 
             <TextBlock Text="Партнеры"
                HorizontalAlignment="Right"
                VerticalAlignment="Center"
                FontSize="16"
                Foreground="White"
-               Margin="0,0,340,0"/>
+               Margin="0,0,340,0"
+               MouseDown="ToPartner"/>
 
             <TextBlock Text="Продукция"
                HorizontalAlignment="Right"
@@ -98,7 +100,8 @@
                VerticalAlignment="Center"
                FontSize="16"
                Foreground="White"
-               Margin="0,0,180,0"/>
+               Margin="0,0,180,0"
+               MouseDown="ToOrder"/>
 
             <TextBlock Text="Отгрузки"
                HorizontalAlignment="Right"

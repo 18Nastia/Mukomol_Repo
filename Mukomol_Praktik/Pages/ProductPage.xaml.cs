@@ -11,8 +11,8 @@ namespace Mukomol_Praktik.Pages
 {
     public partial class ProductPage : Page
     {
-        private List<ProductView> AllProducts = new();
-        public ObservableCollection<ProductView> FilteredProducts { get; set; } = new();
+        private List<ProductViewItem> AllProducts = new();
+        public ObservableCollection<ProductViewItem> FilteredProducts { get; set; } = new();
 
         public ProductPage()
         {
@@ -31,7 +31,7 @@ namespace Mukomol_Praktik.Pages
             // Мука
             foreach (var flour in context.Flours)
             {
-                AllProducts.Add(new ProductView
+                AllProducts.Add(new ProductViewItem
                 {
                     Name = flour.NameFlour,
                     Gost = flour.Gost,
@@ -49,11 +49,11 @@ namespace Mukomol_Praktik.Pages
             {
                 bool isBulk = string.IsNullOrEmpty(pasta.Brand);
 
-                AllProducts.Add(new ProductView
+                AllProducts.Add(new ProductViewItem
                 {
                     Name = pasta.TypePasta,
                     Brand = pasta.Brand,
-                    Packaging = pasta.Packaging,
+                    Packaging = pasta.Packaging?.ToString() ?? "-",
                     ImagePath = pasta.ImagePasta?.StartsWith("/") == true
                                 ? pasta.ImagePasta
                                 : "/" + pasta.ImagePasta,
@@ -61,10 +61,11 @@ namespace Mukomol_Praktik.Pages
                     Type = isBulk ? "PastaBulk" : "PastaPackaged",
 
                     Gost = "-",
-                    Gluten = "-",
+                    Gluten = "-",  // Если в базе int? — тоже .ToString() ?? "-"
                     White = "-"
                 });
             }
+
         }
 
         private void ApplyFilter()
@@ -103,8 +104,26 @@ namespace Mukomol_Praktik.Pages
             }
         }
 
-        private void ToReport(object sender, MouseButtonEventArgs e) => NavigationService.Navigate(new ReportPage());
-        private void ToShipment(object sender, MouseButtonEventArgs e) => NavigationService.Navigate(new ShipmentPage());
+        private void ToMain(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
+        }
+        private void ToPartner(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/PartnerPage.xaml", UriKind.Relative));
+        }
+        private void ToOrder(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/OrderPage.xaml", UriKind.Relative));
+        }
+        private void ToShipment(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/ShipmentPage.xaml", UriKind.Relative));
+        }
+        private void ToReport(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/ReportPage.xaml", UriKind.Relative));
+        }
     }
 
     // Выбор шаблона
@@ -115,7 +134,7 @@ namespace Mukomol_Praktik.Pages
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is ProductView product)
+            if (item is ProductViewItem product)
             {
                 return product.Type == "Flour"
                     ? FlourTemplate

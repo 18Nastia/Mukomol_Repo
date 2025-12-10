@@ -1,4 +1,5 @@
 ﻿using Mukomol_Praktik.Models;
+using Mukomol_Praktik.Pages.AddOrderModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,18 +21,11 @@ namespace Mukomol_Praktik.Pages
     /// <summary>
     /// Логика взаимодействия для AddOrderPage.xaml
     /// </summary>
-    public class ProductView
-    {
-        public int idProduct { get; set; }
-        public string type {  get; set; }
-        public string name { get; set; }
-        public string? amount { get; set; }
-    }
     public partial class AddOrderPage : Page
     {
         private MukomolContext context; 
-        private List<ProductView> ProductsViewBascet { get; set; }
-        private List<ProductView> ProductsView { get; set; }
+        private List<OrderProductView> ProductsViewBascet { get; set; }
+        private List<OrderProductView> ProductsView { get; set; }
         private List<Product> products { get; set; }
         private List<string> partners { get; set; }
         public Order order { get; set; }
@@ -39,8 +33,8 @@ namespace Mukomol_Praktik.Pages
         {
             InitializeComponent();
             context = new MukomolContext();
-            ProductsView = new List<ProductView>();
-            ProductsViewBascet = new List<ProductView>();
+            ProductsView = new List<OrderProductView>();
+            ProductsViewBascet = new List<OrderProductView>();
             products = new List<Product>();
             partners = new List<string>();
             order = new Order();
@@ -50,7 +44,7 @@ namespace Mukomol_Praktik.Pages
         {
             foreach (var productAll in context.Pasta.ToList())
             {
-                ProductView productsView = new ProductView();
+                OrderProductView productsView = new OrderProductView();
                 productsView.type = "Макароны";
                 productsView.idProduct = productAll.IdPasta;
                 productsView.name = $"{productAll.TypePasta} {productAll.Brand}";
@@ -71,7 +65,7 @@ namespace Mukomol_Praktik.Pages
             }
             foreach (var productAll in context.Flours.ToList())
             {
-                ProductView productsView = new ProductView();
+                OrderProductView productsView = new OrderProductView();
                 productsView.type = "Мука";
                 productsView.name = productAll.NameFlour;
                 bool existsInBasket = false;
@@ -105,7 +99,7 @@ namespace Mukomol_Praktik.Pages
         {
             Product product = new Product();
             bool addNewProduct = true;
-            var addProduct = AllProductsDataGrid.SelectedItem as ProductView;
+            var addProduct = AllProductsDataGrid.SelectedItem as OrderProductView;
             if (addProduct != null)
             {
                 if(addProduct.type.ToLower() == "мука")

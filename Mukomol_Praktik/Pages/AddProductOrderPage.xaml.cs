@@ -1,4 +1,5 @@
 ﻿using Mukomol_Praktik.Models;
+using Mukomol_Praktik.Pages.AddOrderModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace Mukomol_Praktik.Pages
 
         private void ViewAddProducts()
         {
-            var availableProducts = new List<ProductView>();
+            var availableProducts = new List<OrderProductView>();
 
             foreach (var pasta in context.Pasta.ToList())
             {
@@ -35,7 +36,7 @@ namespace Mukomol_Praktik.Pages
 
                 if (!alreadyInOrder)
                 {
-                    ProductView productView = new ProductView();
+                    OrderProductView productView = new OrderProductView();
                     productView.type = "Макароны";
                     productView.idProduct = pasta.IdPasta;
                     productView.name = $"{pasta.TypePasta} {pasta.Brand}";
@@ -52,7 +53,7 @@ namespace Mukomol_Praktik.Pages
 
                 if (!alreadyInOrder)
                 {
-                    ProductView productView = new ProductView();
+                    OrderProductView productView = new OrderProductView();
                     productView.type = "Мука";
                     productView.idProduct = flour.IdFlour;
                     productView.name = flour.NameFlour;
@@ -71,7 +72,7 @@ namespace Mukomol_Praktik.Pages
 
         private void AddProduct(object sender, RoutedEventArgs e)
         {
-            var selectedProduct = ProductsDataGrid.SelectedItem as ProductView;
+            var selectedProduct = ProductsDataGrid.SelectedItem as OrderProductView;
 
             if (selectedProduct == null)
             {

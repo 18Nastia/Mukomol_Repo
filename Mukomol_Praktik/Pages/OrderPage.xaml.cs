@@ -163,7 +163,7 @@ namespace Mukomol_Praktik.Pages
         }        
         private void ToReport(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/PartnerPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/ReportPage.xaml", UriKind.Relative));
         }
 
         private void FindOrder(object sender, RoutedEventArgs e)

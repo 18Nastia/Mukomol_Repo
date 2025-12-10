@@ -1,0 +1,133 @@
+﻿<Page x:Class="Mukomol_Praktik.Pages.AddProductOrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mukomol_Praktik.Pages"
+      mc:Ignorable="d" 
+      Title="AddProductOrderPage"
+      x:Name="AddProductOrderPageControl">
+
+    <Grid x:Name="MainContainerGrid">
+        <Grid Background="#f1cf69" x:Name="MainBackgroundGrid">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" x:Name="MainScrollViewer">
+                <Grid x:Name="ContentGrid">
+                    <Image Source="/Image/icon-strelka.png" 
+    HorizontalAlignment="Left" 
+    Height="33" 
+    Margin="30,40,0,0" 
+    VerticalAlignment="Top" 
+    Width="37"
+    MouseDown="ToBack"
+    x:Name="BackArrowImage">
+                    </Image>
+                    <TextBlock Text="Добавление товара в заказ"
+FontSize="30" 
+FontWeight="Bold" 
+Foreground="#041e56" 
+HorizontalAlignment="Center" 
+VerticalAlignment="Top" 
+Margin="0,40,0,0"
+x:Name="TitleTextBlock"/>
+
+                    <TextBlock Text="Выберите товар" 
+                               FontSize="16" 
+                               Foreground="#041e56" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Top" 
+                               Margin="0,100,0,0"
+                               x:Name="SelectProductTextBlock"/>
+
+                    <Grid Margin="50,125,50,160"  
+                          Background="#FFFDE9"
+                          x:Name="ProductsGridContainer">
+                        <DataGrid x:Name="ProductsDataGrid" 
+    AutoGenerateColumns="False"
+    HeadersVisibility="None"
+    BorderThickness="0"
+    GridLinesVisibility="None"
+    Background="White"
+    AlternatingRowBackground="White"
+    RowBackground="#FFFDE9"
+    IsReadOnly="True"
+    CanUserAddRows="False"
+    CanUserDeleteRows="False"
+    CanUserReorderColumns="False"
+    CanUserResizeColumns="False"
+    CanUserResizeRows="False"
+    CanUserSortColumns="False"
+    SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding name}" 
+        Width="*"
+        FontSize="18"                                                
+        FontWeight="Bold" 
+        Foreground="#041e56"
+        x:Name="ProductNameColumn">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Padding" Value="3"/>
+                                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="TextAlignment" Value="Left"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <TextBlock Text="Укажите количество товара" 
+                               FontSize="16" 
+                               Foreground="#041e56" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Bottom" 
+                               Margin="0,390,0,110"
+                               x:Name="QuantityLabelTextBlock"/>
+
+                    <TextBox x:Name="amountNewProduct" 
+                             HorizontalAlignment="Center" 
+                             VerticalAlignment="Bottom" 
+                             Width="100" 
+                             Margin="0,415,0,90"/>
+
+                    <Button Content="Добавить" 
+                            Width="130" 
+                            FontSize="14" 
+                            Padding="7" 
+                            HorizontalAlignment="Center" 
+                            Margin="0,450,150,30" 
+                            Background="#041e56" 
+                            Foreground="White" 
+                            VerticalAlignment="Bottom" 
+                            Click="AddProduct"
+                            x:Name="AddButton">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button Content="Отменить" 
+                            Width="130" 
+                            FontSize="14" 
+                            Padding="7" 
+                            HorizontalAlignment="Center" 
+                            Margin="150,450,0,30" 
+                            Background="#041e56" 
+                            Foreground="White" 
+                            VerticalAlignment="Bottom" 
+                            Click="Cancel"
+                            x:Name="CancelButton">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

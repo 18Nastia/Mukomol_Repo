@@ -10,6 +10,6 @@
         Icon="/Image/logo-mukomol.png"
         Background="White">
     <Grid>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="Pages/ProductPage.xaml"></Frame>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="Pages/MainPage.xaml"></Frame>
     </Grid>
 </Window>

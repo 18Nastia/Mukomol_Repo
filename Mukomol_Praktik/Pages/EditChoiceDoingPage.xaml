@@ -1,0 +1,305 @@
+﻿<Page x:Class="Mukomol_Praktik.Pages.EditChoiceDoingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mukomol_Praktik.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditChoiceDoingPage"
+      x:Name="EditChoiceDoingPageControl">
+
+    <Grid Background="#f1cf69" x:Name="MainGrid">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" x:Name="MainScrollViewer">
+            <Grid x:Name="ContentGrid">
+                <Image Source="/Image/icon-strelka.png" 
+    HorizontalAlignment="Left" 
+    Height="33" 
+    Margin="30,40,0,0" 
+    VerticalAlignment="Top" 
+    Width="37"
+    MouseDown="ToBack"
+    x:Name="BackArrowImage">
+                </Image>
+                <TextBlock Text="Изменение заказа"
+FontSize="30" 
+FontWeight="Bold" 
+Foreground="#041e56" 
+HorizontalAlignment="Center" 
+VerticalAlignment="Top" 
+Margin="0,40,0,0"
+x:Name="TitleTextBlock"/>
+
+                <Border Background="#FFFDE9" 
+                        Margin="50,100,50,0" 
+                        Height="60" 
+                        VerticalAlignment="Top"
+                        CornerRadius="10"
+                        BorderThickness="1"
+                        BorderBrush="#041e56"
+                        x:Name="OrderInfoBorder">
+                    <Grid x:Name="OrderInfoGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"
+                                    x:Name="PartnerStackPanel">
+                            <TextBlock Text="Партнер:" 
+                                       FontSize="14" 
+                                       FontWeight="Bold" 
+                                       Foreground="#041e56"
+                                       x:Name="PartnerLabelTextBlock"/>
+                            <TextBlock x:Name="PartnerTextBlock" 
+                                       Text="Название компании" 
+                                       FontSize="16" 
+                                       Foreground="#041e56"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"
+                                    x:Name="DateStackPanel">
+                            <TextBlock Text="Дата заказа:" 
+                                       FontSize="14" 
+                                       FontWeight="Bold" 
+                                       Foreground="#041e56"
+                                       x:Name="DateLabelTextBlock"/>
+                            <TextBlock x:Name="DateTextBlock" 
+                                       Text="01.01.2024" 
+                                       FontSize="16" 
+                                       Foreground="#041e56"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"
+                                    x:Name="StatusStackPanel">
+                            <TextBlock Text="Статус:" 
+                                       FontSize="14" 
+                                       FontWeight="Bold" 
+                                       Foreground="#041e56"
+                                       x:Name="StatusLabelTextBlock"/>
+                            <TextBlock x:Name="StatusTextBlock" 
+                                       Text="Принят" 
+                                       FontSize="16" 
+                                       Foreground="#041e56"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <TextBlock Text="Товары в заказе" 
+                           FontSize="18" 
+                           Foreground="#041e56" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Top" 
+                           Margin="0,165,0,0"
+                           x:Name="ProductsTitleTextBlock"/>
+
+                <Grid Margin="50,190,50,170"  
+                      Background="#FFFDE9"
+                      x:Name="ProductsGridContainer">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="169*"/>
+                        <ColumnDefinition Width="181*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="ProductsInOrderDataGrid" 
+                                AutoGenerateColumns="False"
+                                HeadersVisibility="None"
+                                BorderThickness="0"
+                                GridLinesVisibility="None"
+                                Background="White"
+                                AlternatingRowBackground="White"
+                                RowBackground="#FFFDE9"
+                                IsReadOnly="True"
+                                CanUserAddRows="False"
+                                CanUserDeleteRows="False"
+                                CanUserReorderColumns="False"
+                                CanUserResizeColumns="False"
+                                CanUserResizeRows="False"
+                                CanUserSortColumns="False"
+                                SelectionMode="Single" 
+                                Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding name}" 
+                                        Width="3*"
+                                        FontSize="18"                                                
+                                        FontWeight="Bold" 
+                                        Foreground="#041e56"
+                                        x:Name="ProductNameColumn">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Padding" Value="3"/>
+                                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="TextAlignment" Value="Left"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding amount}" 
+                                        Width="*"
+                                        FontSize="18"                                                
+                                        FontWeight="Bold" 
+                                        Foreground="#041e56"
+                                        x:Name="ProductAmountColumn">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Padding" Value="3"/>
+                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="TextAlignment" Value="Right"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <TextBlock Text="Введите новое количество" 
+                           FontSize="16" 
+                           Foreground="#041e56" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Bottom" 
+                           Margin="0,0,300,135"
+                           x:Name="NewAmountLabelTextBlock"/>
+
+                <TextBox x:Name="EditAmountProductTextBox" 
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Bottom" 
+                         Width="200" 
+                         FontSize="16" 
+                         Margin="0,0,300,110" 
+                         Height="27"/>
+
+                <TextBlock Text="Выберите новый статус" 
+                           FontSize="16" 
+                           Foreground="#041e56" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Bottom" 
+                           Margin="300,0,0,135"
+                           x:Name="NewStatusLabelTextBlock"/>
+
+                <ComboBox x:Name="EditStatusComboBox" 
+                          HorizontalAlignment="Center" 
+                          VerticalAlignment="Bottom" 
+                          Width="200" 
+                          FontSize="16" 
+                          Margin="300,0,0,110"/>
+
+                <Button Content="Удалить товар" 
+                        Width="160" 
+                        FontSize="14" 
+                        Padding="7" 
+                        HorizontalAlignment="Center" 
+                        Margin="0,285,350,60" 
+                        Background="#041e56" 
+                        Foreground="White" 
+                        VerticalAlignment="Bottom" 
+                        Click="DeleteProductOrder"
+                        x:Name="DeleteProductButton">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Добавить товар" 
+                        Width="160" 
+                        FontSize="14" 
+                        Padding="7" 
+                        HorizontalAlignment="Center" 
+                        Margin="0,285,350,20" 
+                        Background="#041e56" 
+                        Foreground="White" 
+                        VerticalAlignment="Bottom" 
+                        Click="ToAddProduct"
+                        x:Name="AddProductButton">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Отменить" 
+                        Width="160" 
+                        FontSize="14" 
+                        Padding="7" 
+                        HorizontalAlignment="Center" 
+                        Margin="350,285,0,20" 
+                        Background="#041e56" 
+                        Foreground="White" 
+                        VerticalAlignment="Bottom"
+                        x:Name="CancelButton">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Сохранить изменения" 
+                        Width="160" 
+                        FontSize="14" 
+                        Padding="7" 
+                        HorizontalAlignment="Center" 
+                        Margin="0,285,0,20" 
+                        Background="#041e56" 
+                        Foreground="White" 
+                        VerticalAlignment="Bottom" 
+                        Click="SaveEditOrder"
+                        x:Name="SaveChangesButton">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Изменить статус" 
+                        Width="160" 
+                        FontSize="14" 
+                        Padding="7" 
+                        HorizontalAlignment="Center" 
+                        Margin="0,285,0,60" 
+                        Background="#041e56" 
+                        Foreground="White" 
+                        VerticalAlignment="Bottom" 
+                        Click="EditStatus"
+                        x:Name="EditStatusButton">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Изменить количество" 
+                        Width="160" 
+                        FontSize="14" 
+                        Padding="7" 
+                        HorizontalAlignment="Center" 
+                        Margin="350,285,0,60" 
+                        Background="#041e56" 
+                        Foreground="White" 
+                        VerticalAlignment="Bottom" 
+                        Click="EditCountProduct"
+                        x:Name="EditAmountButton">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

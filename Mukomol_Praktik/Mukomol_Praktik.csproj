@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Image\image_logo\magnit.png"/>
     <None Remove="Image\icon-strelka.png" />
     <None Remove="Image\image_pasta\pasta_fas\perya-don-makaron-gurman-300x300.jpg" />
     <None Remove="Image\image_pasta\pasta_fas\perya-TEZORINI-1-300x300.png" />
@@ -59,6 +60,7 @@
     <None Remove="Image\image_pasta\pasta_weight\macaroni-ulitki2-mukomol-vladimir-300x300.png" />
     <None Remove="Image\image_pasta\pasta_weight\macaroni-vermishel2-mukomol-vladimir-300x300.png" />
     <None Remove="Image\logo-mukomol.png" />
+    <None Remove="logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -127,5 +129,5 @@
     <Resource Include="Image\image_pasta\pasta_weight\macaroni-vermishel2-mukomol-vladimir-300x300.png" />
     <Resource Include="Image\logo-mukomol.png" />
   </ItemGroup>
-
+    
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Mukomol_Praktik;
+namespace Mukomol_Praktik.Models;
 
 public partial class Order
 {
@@ -17,7 +17,7 @@ public partial class Order
 
     public string? CommentOrder { get; set; }
 
-    public virtual Models.Partner IdPartnerNavigation { get; set; } = null!;
+    public virtual Partner IdPartnerNavigation { get; set; } = null!;
 
-    public virtual ICollection<Models.Product> Products { get; set; } = new List<Models.Product>();
+    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

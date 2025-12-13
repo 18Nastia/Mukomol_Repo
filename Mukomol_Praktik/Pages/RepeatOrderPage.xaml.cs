@@ -3,54 +3,35 @@ using Mukomol_Praktik.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Mukomol_Praktik.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для OrderPage.xaml
-    /// </summary>
-    public class OrderView
-    {
-        public int idOrderView { get; set; }
-        public string companyName { get; set; }
-        public string productsOrder { get; set; }
-        public string countProducts { get; set; }
-        public DateOnly dateOrder { get; set; }
-        public string FormattedDate => dateOrder.ToString("dd.MM.yyyy");
-        public string statusOrder { get; set; }
-    }
-    public partial class OrderPage : Page
+    public partial class RepeatOrderPage : Page
     {
         private MukomolContext context;
         private List<OrderView> orderViews { get; set; }
         private List<OrderView> filteredOrderViews { get; set; }
 
-        public OrderPage()
+        public RepeatOrderPage()
         {
             InitializeComponent();
             context = new MukomolContext();
             orderViews = new List<OrderView>();
             filteredOrderViews = new List<OrderView>();
+            FilterComboBox.Items.Add("Дате (новые сверху)");
+            FilterComboBox.Items.Add("Дате (старые сверху)");
+            FilterComboBox.Items.Add("Партнеру (А-Я)");
+            FilterComboBox.Items.Add("Партнеру (Я-А)");
+            FilterComboBox.Items.Add("Статусу (А-Я)");
+            FilterComboBox.Items.Add("Статусу (Я-А)");
+            FilterComboBox.Text = "";
+
             ViewOrders();
-            SortComboBox.Items.Add("Дате (новые сверху)");
-            SortComboBox.Items.Add("Дате (старые сверху)");
-            SortComboBox.Items.Add("Партнеру (А-Я)");
-            SortComboBox.Items.Add("Партнеру (Я-А)");
-            SortComboBox.Items.Add("Статусу (А-Я)");
-            SortComboBox.Items.Add("Статусу (Я-А)");
-            SortComboBox.Text = "";
         }
+
         public void ViewOrders()
         {
             var orders = context.Orders
@@ -132,50 +113,6 @@ namespace Mukomol_Praktik.Pages
         {
             NavigationService.GoBack();
         }
-        private void ToMain(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
-        }
-        private void ToAddOrder(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/AddOrderPage.xaml", UriKind.Relative));
-        }
-
-        private void ToEditOrder(object sender, RoutedEventArgs e)
-        {
-            OrderView editOrderView = OrdersDataGrid.SelectedItem as OrderView;
-
-            if (editOrderView != null && context.Orders.Find(editOrderView.idOrderView) != null)
-            {
-                Order editOrder = context.Orders.Find(editOrderView.idOrderView);
-                EditChoiceDoingPage editChoiceDoingPage = new EditChoiceDoingPage(editOrder);
-                NavigationService.Navigate(editChoiceDoingPage);
-            }
-            else
-            {
-                MessageBox.Show("Для изменения выберите заказ",
-                                "Ошибка",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Error);
-            }
-        }
-
-        private void ToPartner(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/PartnerPage.xaml", UriKind.Relative));
-        }
-        private void ToProduct(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/ProductPage.xaml", UriKind.Relative));
-        }
-        private void ToShipment(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/ShipmentPage.xaml", UriKind.Relative));
-        }
-        private void ToReport(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/PartnerPage.xaml", UriKind.Relative));
-        }
 
         private void FindOrder(object sender, RoutedEventArgs e)
         {
@@ -225,7 +162,7 @@ namespace Mukomol_Praktik.Pages
             {
                 filteredOrderViews = orderViews;
             }
-            switch (SortComboBox.Text)
+            switch (FilterComboBox.Text)
             {
                 case "Дате (новые сверху)":
                     filteredOrderViews = filteredOrderViews
@@ -261,5 +198,102 @@ namespace Mukomol_Praktik.Pages
             OrdersDataGrid.ItemsSource = null;
             OrdersDataGrid.ItemsSource = filteredOrderViews;
         }
+
+        private void RepeatOrder(object sender, RoutedEventArgs e)
+        {
+            OrderView selectedOrderView = OrdersDataGrid.SelectedItem as OrderView;
+
+            if (selectedOrderView != null)
+            {
+                try
+                {
+                    Order originalOrder = context.Orders
+                        .Include(o => o.Products)
+                        .Include(o => o.IdPartnerNavigation)
+                        .FirstOrDefault(o => o.IdOrder == selectedOrderView.idOrderView);
+
+                    if (originalOrder != null)
+                    {
+                        List<ProductView> repeatedProducts = new List<ProductView>();
+
+                        foreach (var product in originalOrder.Products)
+                        {
+                            ProductView productView = new ProductView();
+
+                            if (product.IdFlour != null)
+                            {
+                                var flour = context.Flours.Find(product.IdFlour);
+                                if (flour != null)
+                                {
+                                    productView.type = "Мука";
+                                    productView.name = flour.NameFlour;
+                                    productView.amount = $"{product.Amount} г";
+                                    productView.originalAmount = product.Amount;
+                                }
+                            }
+                            else if (product.IdPasta != null)
+                            {
+                                var pasta = context.Pasta.Find(product.IdPasta);
+                                if (pasta != null)
+                                {
+                                    productView.type = "Макароны";
+                                    productView.idProduct = pasta.IdPasta;
+                                    productView.name = $"{pasta.TypePasta} {pasta.Brand}";
+                                    if (pasta.Packaging != null)
+                                        productView.name += $" {pasta.Packaging}г";
+                                    productView.originalAmount = product.Amount;
+
+                                    if (pasta.Packaging != null)
+                                    {
+                                        productView.amount = $"{product.Amount} шт";
+                                    }
+                                    else
+                                    {
+                                        productView.amount = $"{product.Amount} г";
+                                    }
+                                }
+                            }
+
+                            if (!string.IsNullOrEmpty(productView.name))
+                            {
+                                repeatedProducts.Add(productView);
+                            }
+                        }
+
+                        string partnerName = originalOrder.IdPartnerNavigation?.NameCompany ?? "";
+                        AddOrderPage addOrderPage = new AddOrderPage(repeatedProducts, partnerName);
+                        NavigationService.Navigate(addOrderPage);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не удалось найти выбранный заказ!",
+                                        "Ошибка",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при повторении заказа: {ex.Message}",
+                                    "Ошибка",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите заказ для повторения!",
+                                "Ошибка",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
+        }
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/OrderPage.xaml", UriKind.Relative));
+        }
+
+
+
     }
 }

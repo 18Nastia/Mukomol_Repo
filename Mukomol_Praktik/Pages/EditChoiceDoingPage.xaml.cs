@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mukomol_Praktik.Models;
-using Mukomol_Praktik.Pages.AddOrderModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ using System.Windows.Input;
 
 namespace Mukomol_Praktik.Pages
 {
-    public class ProductOrder : OrderProductView
+    public class ProductOrder : ProductView
     {
         public int idProductOrder { get; set; }
     }
@@ -228,7 +227,16 @@ namespace Mukomol_Praktik.Pages
                 foreach (var product in editProducts.Where(p => p.IdProduct > 0))
                 {
                     var productInDb = context.Products.Find(product.IdProduct);
-                    if (productInDb != null)
+                    if (productInDb != null && productInDb.Amount != product.Amount)
+                    {
+                        productInDb.Amount = product.Amount;
+                        var orderInDb = context.Orders.Find(orderId);
+                        if (orderInDb != null)
+                        {
+                            orderInDb.DateOrder = DateOnly.FromDateTime(DateTime.Now);
+                        }
+                    }
+                    else if (productInDb != null)
                     {
                         productInDb.Amount = product.Amount;
                     }
@@ -237,6 +245,11 @@ namespace Mukomol_Praktik.Pages
                 foreach (var product in editProducts.Where(p => p.IdProduct == 0))
                 {
                     context.Products.Add(product);
+                    var orderInDb = context.Orders.Find(orderId);
+                    if (orderInDb != null)
+                    {
+                        orderInDb.DateOrder = DateOnly.FromDateTime(DateTime.Now);
+                    }
                 }
 
                 foreach (var productToDelete in productsToDelete)
@@ -245,6 +258,11 @@ namespace Mukomol_Praktik.Pages
                     if (productInDb != null)
                     {
                         context.Products.Remove(productInDb);
+                        var orderInDb = context.Orders.Find(orderId);
+                        if (orderInDb != null)
+                        {
+                            orderInDb.DateOrder = DateOnly.FromDateTime(DateTime.Now);
+                        }
                     }
                 }
 
@@ -263,7 +281,7 @@ namespace Mukomol_Praktik.Pages
 
         private void CancelEdit(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new Uri("/Pages/OrderPage.xaml", UriKind.Relative));
         }
 
         private void ToAddProduct(object sender, RoutedEventArgs e)

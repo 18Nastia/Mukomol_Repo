@@ -172,11 +172,11 @@
                           Margin="0,555,0,0"/>
 
                 <Button Content="Добавить товар" 
-                        Width="130" 
+                        Width="160" 
                         FontSize="14" 
                         Padding="7" 
                         HorizontalAlignment="Center" 
-                        Margin="0,600,300,50" 
+                        Margin="0,600,340,50" 
                         Background="#041e56" 
                         Foreground="White" 
                         VerticalAlignment="Top" 
@@ -189,8 +189,8 @@
                     </Button.Resources>
                 </Button>
 
-                <Button Content="Сохранить заказ" 
-                        Width="130" 
+                <Button Content="Изменить количество" 
+                        Width="160" 
                         FontSize="14" 
                         Padding="7" 
                         HorizontalAlignment="Center" 
@@ -198,8 +198,43 @@
                         Background="#041e56" 
                         Foreground="White" 
                         VerticalAlignment="Top" 
-                        Click="SaveOrder"
-                        x:Name="SaveOrderButton">
+                        Click="EditAmount"
+                        x:Name="EditAmountButton">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Повторить заказ" 
+                        Width="160" 
+                        FontSize="14" 
+                        Padding="7" 
+                        HorizontalAlignment="Center" 
+                        Margin="340,600,0,50" 
+                        Background="#041e56" 
+                        Foreground="White" 
+                        VerticalAlignment="Top"
+                        x:Name="RepeatButton" 
+                        Click="RepeatOrder">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="Сохранить заказ" 
+        Width="160" 
+        FontSize="14" 
+        Padding="7" 
+        HorizontalAlignment="Center" 
+        Margin="0,650,170,50" 
+        Background="#041e56" 
+        Foreground="White" 
+        VerticalAlignment="Top" 
+        Click="SaveOrder"
+        x:Name="SaveOrderButton">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -208,15 +243,16 @@
                 </Button>
 
                 <Button Content="Отменить" 
-                        Width="130" 
+                        Width="160" 
                         FontSize="14" 
                         Padding="7" 
                         HorizontalAlignment="Center" 
-                        Margin="300,600,0,50" 
+                        Margin="170,650,0,50" 
                         Background="#041e56" 
                         Foreground="White" 
                         VerticalAlignment="Top"
-                        x:Name="CancelButton">
+                        x:Name="CancelBtn" 
+                        Click="CancelButton">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>

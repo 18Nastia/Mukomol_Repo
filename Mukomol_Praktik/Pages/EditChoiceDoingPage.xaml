@@ -238,7 +238,7 @@ x:Name="TitleTextBlock"/>
                         Background="#041e56" 
                         Foreground="White" 
                         VerticalAlignment="Bottom"
-                        x:Name="CancelButton">
+                        x:Name="CancelButton" Click="CancelEdit">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>

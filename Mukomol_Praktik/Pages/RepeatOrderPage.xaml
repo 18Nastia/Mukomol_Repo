@@ -1,4 +1,4 @@
-﻿<Page x:Class="Mukomol_Praktik.Pages.OrderPage"
+﻿<Page x:Class="Mukomol_Praktik.Pages.RepeatOrderPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,79 +6,32 @@
       xmlns:local="clr-namespace:Mukomol_Praktik.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="OrderPage">
+      Title="RepeatOrderPage">
 
-    <Grid x:Name="MainGrid">
-        <Grid x:Name="HeaderGrid" Background="#f1cf69" Height="80" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <Image x:Name="LogoImage" 
-                   Source="/Image/logo-mukomol.png" 
-                   Width="50" Height="60" 
-                   HorizontalAlignment="Left" 
-                   VerticalAlignment="Center"  
-                   Margin="50,0,0,0"
-                   MouseDown="ToMain"/>
-            <TextBlock x:Name="PartnersTextBlock" 
-                       Text="Партнеры" 
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       Foreground="White"
-                       Margin="0,0,340,0" 
-                       MouseDown="ToPartner"/>
-            <TextBlock x:Name="ProductsTextBlock"
-                       Text="Продукция"
-                       MouseDown="ToProduct"
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       Foreground="White"
-                       Margin="0,0,245,0"/>
-            <TextBlock x:Name="OrdersTextBlock" 
-                       Text="Заказы" 
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       Foreground="Gray"
-                       Margin="0,0,180,0"/>
-            <TextBlock x:Name="ShipmentsTextBlock" 
-                       Text="Отгрузки" 
-                       MouseDown="ToShipment"
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       Foreground="White"
-                       Margin="0,0,100,0"/>
-            <TextBlock x:Name="ReportsTextBlock"
-                       Text="Отчёты"
-                       MouseDown="ToReport"
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       Foreground="White"
-                       Margin="0,0,30,0"/>
-        </Grid>
+    <Grid x:Name="MainGrid" Background="#f1cf69">
+
 
         <Image x:Name="BackArrowImage" 
                Source="/Image/icon-strelka.png" 
                HorizontalAlignment="Left" 
                Height="33" 
-               Margin="30,100,0,0" 
+               Margin="30,50,0,0" 
                VerticalAlignment="Top" 
                Width="37"
                MouseDown="ToBack">
         </Image>
-        <TextBlock x:Name="OrdersTitleTextBlock" 
-                   Text="Заказы" 
+        <TextBlock x:Name="RepeatOrdersTitleTextBlock" 
+                   Text="Повтор заказа" 
                    FontSize="30" 
                    FontWeight="Bold" 
                    Foreground="#041e56" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Top" 
-                   Margin="0,90,0,0"/>
+                   Margin="0,40,0,0"/>
 
         <Grid x:Name="SearchGrid" 
               VerticalAlignment="Top"
-              Margin="50,140,50,10">
+              Margin="50,110,50,10">
             <TextBox x:Name="FindOrderTextBox"
                      MaxLength="100"
                      FontSize="16"
@@ -100,8 +53,8 @@
 
         <Grid x:Name="FilterGrid" 
               VerticalAlignment="Top"
-              Margin="50,190,50,10">
-            <ComboBox x:Name="SortComboBox" 
+              Margin="50,160,50,10">
+            <ComboBox x:Name="FilterComboBox" 
                       HorizontalAlignment="Stretch" 
                       FontSize="16" 
                       Height="30" 
@@ -120,7 +73,7 @@
         </Grid>
 
         <Grid x:Name="OrdersContainerGrid" 
-              Margin="50,240,50,75" 
+              Margin="50,210,50,75" 
               Background="#FFFDE9">
             <DataGrid x:Name="OrdersDataGrid" 
                       AutoGenerateColumns="False"
@@ -141,7 +94,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="CompanyNameColumn" 
                                         Binding="{Binding companyName}" 
-                                        Width="0.8*"
+                                        Width="1*"
                                         FontSize="16"
                                         FontWeight="Bold" 
                                         Foreground="#041e56">
@@ -171,7 +124,7 @@
 
                     <DataGridTextColumn x:Name="CountProductsColumn" 
                                         Binding="{Binding countProducts}" 
-                                        Width="*"
+                                        Width="1*"
                                         FontSize="16">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
@@ -185,7 +138,7 @@
 
                     <DataGridTextColumn x:Name="DateColumn" 
                                         Binding="{Binding FormattedDate}" 
-                                        Width="0.8*"
+                                        Width="1*"
                                         FontSize="16"
                                         Foreground="#041e56">
                         <DataGridTextColumn.ElementStyle>
@@ -199,7 +152,7 @@
 
                     <DataGridTextColumn x:Name="StatusColumn" 
                                         Binding="{Binding statusOrder}" 
-                                        Width="*"
+                                        Width="1*"
                                         FontSize="16"
                                         FontWeight="Bold" 
                                         Foreground="#041e56">
@@ -215,8 +168,8 @@
             </DataGrid>
         </Grid>
 
-        <Button x:Name="AddOrderButton" 
-                Content="Добавить" 
+        <Button x:Name="RepeatOrderButton" 
+                Content="Повторить" 
                 Width="90" 
                 FontSize="14" 
                 Padding="7" 
@@ -225,7 +178,7 @@
                 Background="#041e56" 
                 Foreground="White" 
                 VerticalAlignment="Bottom" 
-                Click="ToAddOrder">
+                Click="RepeatOrder">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -233,8 +186,8 @@
             </Button.Resources>
         </Button>
 
-        <Button x:Name="EditOrderButton" 
-                Content="Изменить" 
+        <Button x:Name="CancelButton" 
+                Content="Отмена" 
                 Width="90" 
                 FontSize="14" 
                 Padding="7" 
@@ -243,7 +196,7 @@
                 Background="#041e56" 
                 Foreground="White" 
                 VerticalAlignment="Bottom" 
-                Click="ToEditOrder">
+                Click="Cancel">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
